@@ -1,0 +1,27 @@
+.back__container {
+    // width: 445px;
+    margin: 0 auto;
+
+    .back__button {
+        width: 152px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 10px;
+        border-radius: 10px;
+
+        &:hover {
+            background-color: rgba(51, 51, 51, 0.2);
+        }
+    }
+}
+
+.back__image {
+    width: 23px;
+    height: 22px;
+}
+
+.back__context {
+    font-size: 25px;
+    line-height: 37.5px;
+}
