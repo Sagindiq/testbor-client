@@ -6,6 +6,7 @@ import Link from "next/link";
 const poppins = Poppins({ weight: '500'})
 
 const Back = () => {
+
     return (
         <div className='back__container'>
             <Link className='back__button' href={'/'}>

@@ -2,6 +2,7 @@ import '../styles/main.scss'
 import type { AppProps } from 'next/app'
 import { useState } from 'react'
 import { Router } from 'next/router'
+import AlertProvider from '../context/alert.context'
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -21,7 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Component {...pageProps} />
+      <AlertProvider>
+        <Component {...pageProps} />
+      </AlertProvider>
 
       <div className={`loading ${cname}`}>
         <div className='loader'>Loading...</div>

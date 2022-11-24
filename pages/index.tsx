@@ -3,10 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '../components/header'
 import { Play } from '@next/font/google'
+import { NextPage } from 'next'
 
 const play = Play({ weight: '400' })
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -40,3 +41,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home;

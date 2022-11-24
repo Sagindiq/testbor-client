@@ -4,10 +4,9 @@ import { Stack } from '@mui/system';
 import Link from 'next/link';
 import Header from '../../components/header';
 import { RegisterInput, Selector, Password, Gender} from '../../components/register-form'
+import { NextPage } from 'next';
 
-function Register() {
-
-    
+const Register: NextPage = () => {
     
     return (
         <>

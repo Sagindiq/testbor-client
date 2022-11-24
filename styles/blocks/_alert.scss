@@ -1,0 +1,30 @@
+.alert {
+    width: 400px;
+    position: absolute;
+    top: 75px;
+    right: 40px;
+    z-index: 10;
+    animation: alert-active .8s;
+}
+
+.alert--disable {
+    animation: alert-disable 1s;
+}
+
+@keyframes alert-active {
+    0% {
+        transform: translateX(200%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes alert-disable {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(200%);
+    }
+}
