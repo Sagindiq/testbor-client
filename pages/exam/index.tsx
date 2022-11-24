@@ -4,7 +4,6 @@ import Header from "../../components/header";
 import ScienceProcess from "../../components/science/science.process";
 import ScienceSelector from "../../components/science/select";
 import { sciencesInterface } from "../../interfaces/science.interface";
-import Router from "next/router";
 const poppins = Poppins({ weight: '500'})
 
 export const getStaticProps = async() => {
@@ -21,12 +20,7 @@ export default function Exam({ sciences }: sciencesInterface) {
 
   const handleChange = (first_science: string, second_science: string) => {
     
-    if (first_science && second_science) {
-      Router.push({
-        pathname: '/faculties',
-        
-      })
-    }
+    console.log(first_science, second_science)
   }
 
 
