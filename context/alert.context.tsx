@@ -16,14 +16,22 @@ const AlertProvider = ({ children }: PropsWithChildren) => {
     const [ alert, setAlert ] = useState('')
 
     useEffect(() => {
+
+        const messageLength: number = message.split(' ').length
+        // const timeout = messageLength <= 6 ? 2200 : messageLength > 6 ? 3000 : messageLength > 10
+        
+        const timeout: number = messageLength / 2 * 1000
+
+        console.log(timeout)
+        
         setTimeout(() => {
             alertRef.current?.classList.add('alert--disable')
-        }, 3000);
+        }, timeout);
 
         setTimeout(() => {
-            setAlert('')
             setMessage('')
-        }, 4000);
+            setAlert('')
+        }, timeout + 500);
     }, [alert])
     
 
@@ -34,29 +42,29 @@ const AlertProvider = ({ children }: PropsWithChildren) => {
             {
                 alert == 'error' ? <>
                     <Alert className="alert" ref={alertRef} severity='error'>
-                        <AlertTitle>Xato!</AlertTitle>
-                        {message}
+                        <AlertTitle>Xato</AlertTitle>
+                        {message}!
                     </Alert>
                 </>
                 :
                 alert == 'info' ? <>
                     <Alert className="alert" ref={alertRef} severity='info'>
-                        <AlertTitle>Malumot!</AlertTitle>
-                        {message}
+                        <AlertTitle>Malumot</AlertTitle>
+                        {message}!
                     </Alert>
                 </>
                 :
                 alert == 'warning' ? <>
                     <Alert className="alert" ref={alertRef} severity='warning'>
-                        <AlertTitle>Ogohlantirish!</AlertTitle>
-                        {message}
+                        <AlertTitle>Ogohlantirish</AlertTitle>
+                        {message}!
                     </Alert>
                 </>
                 :
                 alert == 'success' && <>
                     <Alert className="alert" ref={alertRef} severity='success'>
-                        <AlertTitle>Muvaffaqiyatli!</AlertTitle>
-                        {message}
+                        <AlertTitle>Muvaffaqiyatli</AlertTitle>
+                        {message}!
                     </Alert>
                 </>
             }

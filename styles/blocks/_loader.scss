@@ -24,8 +24,8 @@
 .loader:before,
 .loader:after {
   background: #ffffff;
-  -webkit-animation: load1 1s infinite ease-in-out;
-  animation: load1 1s infinite ease-in-out;
+  -webkit-animation: load1 0.6s infinite ease-in-out;
+  animation: load1 0.6s infinite ease-in-out;
   width: 1em;
   height: 4em;
 }

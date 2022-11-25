@@ -1,20 +1,31 @@
 import { Poppins } from '@next/font/google'
+import { useState } from 'react'
 
 const poppins = Poppins({weight: '500'})
 
-export default function ScienceProcess() {
+export interface process {
+    process: Number | String
+}
+
+export default function ScienceProcess({ process } : process) {
+
+    const isProcess: string[] = []
+
+    for (let i = 0; i < process; i++) {
+        isProcess.push('stage__item--active')
+    }
 
     return (
         <ul className='stage__list'>
-            <li className='stage__item stage__item--active'>
+            <li className={`stage__item ${isProcess[0]}`}>
                 <p className={poppins.className}>1</p>
             </li>
             <li className='stage__item stage__item--line'></li>
-            <li className='stage__item'>
+            <li className={`stage__item ${isProcess[1]}`}>
                 <p className={poppins.className}>2</p>
             </li>
             <li className='stage__item stage__item--line'></li>
-            <li className='stage__item'>
+            <li className={`stage__item ${isProcess[2]}`}>
                 <p className={poppins.className}>3</p>
             </li>
         </ul>

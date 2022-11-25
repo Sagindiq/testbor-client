@@ -8,12 +8,19 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const [ cname, setCName ] = useState('')
 
-    Router.events.on('routeChangeStart', (): void => {
+    Router.events.on('routeChangeStart', (url: string): void => {
+      
+      if (url !=='/exam') {
         setCName('loading--active')
+      }
+
     })
 
-    Router.events.on('routeChangeComplete', (): void => {
-      setCName('')
+    Router.events.on('routeChangeComplete', (url: string): void => {
+
+      if (url !== '/exam') {
+        setCName('')
+      }
     })
 
     // Router.events.on('hashChangeStart', (): void => {

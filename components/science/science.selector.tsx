@@ -1,19 +1,17 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material"
-import { Router } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAlert } from "../../context/alert.context";
 import { sciencesInterface } from "../../interfaces/science.interface";
-import AlertError from "../alerts/error";
-// const sciences = [
-//     {
-//         id: 1,
-//         name: 'Fizika'
-//     }
-// ]
 
 const ScienceSelector = ({ sciences, handleChange }: sciencesInterface) => {
 
     const { setAlert, setMessage }: any = useAlert()
+
+    useEffect(() => {
+        setAlert('info')
+        setMessage('Iltimos imtihon fanlarini tanlashdan to imtihon javoblari natijasi chiqmaguncha sahifani umuman yangilamang')
+    }, [])
+    
 
     const [firstScience, setFirstScience] = useState('');
     const [secondScience, setSecondScience] = useState('');

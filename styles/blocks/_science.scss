@@ -1,5 +1,6 @@
 .science {
-    margin-top: 20px;
+    // margin-top: 10px;
+    padding: 10px 0;
 }
 
 .sciencee__container {
@@ -8,8 +9,10 @@
 
     h1 {
         text-align: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 22px;
+        line-height: 1.5;
     }
 }
 
@@ -23,7 +26,8 @@
 .stage__list {
     width: 100%;
     margin: 0 auto;
-    margin-top: 20px;
+    padding: 5px 0;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,12 +47,38 @@
     box-shadow: 0px 0px 6px #18A0FB;
 }
 
+.stage__item--active:first-child p {
+    animation: circle 0.5s ease;
+}
+
+.stage__item--active:nth-child(3) p {
+    animation: circle .9s ease;
+}
+
+.stage__item--active:nth-child(5) p {
+    animation: circle 1.3s ease;
+}
+
 .stage__item:first-child p {
-    padding: 10px 26px;
+    padding: 7px 26px;
 }
 
 .stage__item--line {
     width: 375px;
     height: 1px;
     background-color: #AEAEAE;
+}
+
+@keyframes circle {
+    0% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(1.3)
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
