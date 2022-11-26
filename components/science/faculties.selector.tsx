@@ -104,9 +104,12 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import {facultyArr, facultySelector } from '../../interfaces/faculties.interface';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-
 import Router from 'next/router';
 import { useAlert } from '../../context/alert.context';
+import { motion } from 'framer-motion'
+import { Poppins } from '@next/font/google';
+
+const poppins = Poppins({ weight: '500'})
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -185,7 +188,7 @@ export default function FacultiesSelector({ facultiesArr, facultyChange }: facul
     return (
         <div className='faculties'>
 
-            <div className='faculties-selector'>
+            <motion.div className='faculties-selector' initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
                 <FormControl sx={{ m: 1, width: '400px' }}>
                     <InputLabel id="demo-multiple-name-label">Fakultetlar</InputLabel>
                     <Select
@@ -209,21 +212,58 @@ export default function FacultiesSelector({ facultiesArr, facultyChange }: facul
                     </Select>
                 </FormControl>
 
-            </div>
-            {faculties.length > 0 && <ol className="faculty__list">
+            </motion.div>
+            
+            {faculties.length > 0 && 
+            <div>
+                <motion.ol initial={{x: 350, opacity: 0}} animate={{x: 0, opacity: 1}} className="faculty__list">
                     {
-                        facultiesData.map(el => 
-                        
-                            <li className="faculty__item" key={el._id}>
-                                <p>{el.faculty_name} ({el.hei_short_name})</p>
+                        facultiesData.map(el =>
+
+                            <motion.li initial={{scale: 0, opacity: 0}} animate={{scale: 1, opacity: 0.5}} className="faculty__item" key={el._id}>
+                                <p className={poppins.className}>{el.faculty_name} ({el.hei_short_name})</p>
                                 <IconButton onClick={handleCancel} className='cancel' sx={{ color: '#181616' }} data-id={el._id} aria-label="add to shopping cart">
                                     <CloseIcon sx={{ pointerEvents: 'none' }} />
                                 </IconButton>
-                            </li>
-                        
+                            </motion.li>
+
                         )
                     }
-                </ol>}
+                </motion.ol>
+
+                    {
+                        facultiesData.length > 4 &&
+                        <motion.div initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}} className="faculty__info">
+
+                            <h3>Namangan davlat tibbiyot universiteti</h3>
+                            <p>Namangan viloyati</p>
+
+                            <table>
+                                {/* <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Limit</th>
+                                        <th>ball</th>
+                                    </tr>
+                                </thead> */}
+                                <tbody>
+                                    <tr>
+                                        <td className='faculty__title'>Grant</td>
+                                        <td className='faculty__limit'>78</td>
+                                        <td className='faculty__score'>189.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='faculty__title'>Shartnoma</td>
+                                        <td className='faculty__limit'>84</td>
+                                        <td className='faculty__score'>173.6</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </motion.div>
+                    }
+                
+            </div>}
         </div>
     );
 }

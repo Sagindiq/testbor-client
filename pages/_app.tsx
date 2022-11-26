@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { useState } from 'react'
 import { Router } from 'next/router'
 import AlertProvider from '../context/alert.context'
+import { AnimatePresence } from 'framer-motion'
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -30,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <AlertProvider>
-        <Component {...pageProps} />
+        <AnimatePresence>
+          <Component {...pageProps} />
+        </AnimatePresence>
       </AlertProvider>
 
       <div className={`loading ${cname}`}>

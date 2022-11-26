@@ -1,17 +1,16 @@
 import { Poppins } from '@next/font/google'
-import { useState } from 'react'
 
 const poppins = Poppins({weight: '500'})
 
-export interface process {
-    process: Number | String
+export interface scienceProcess {
+    scienceProcess: Number | String
 }
 
-export default function ScienceProcess({ process } : process) {
+export default function ScienceProcess({ scienceProcess } : scienceProcess ) {
 
     const isProcess: string[] = []
 
-    for (let i = 0; i < process; i++) {
+    for (let i = 0; i < scienceProcess; i++) {
         isProcess.push('stage__item--active')
     }
 

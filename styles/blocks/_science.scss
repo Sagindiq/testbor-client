@@ -23,6 +23,19 @@
 
 }
 
+.science__selector-box:first-child {
+    margin-bottom: 15px;
+}
+
+.science__selector-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 36px;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
 .stage__list {
     width: 100%;
     margin: 0 auto;
@@ -47,17 +60,17 @@
     box-shadow: 0px 0px 6px #18A0FB;
 }
 
-.stage__item--active:first-child p {
-    animation: circle 0.5s ease;
+.stage__item--active p {
+    animation: circle 0.4s ease;
 }
 
-.stage__item--active:nth-child(3) p {
-    animation: circle .9s ease;
-}
+// .stage__item--active:nth-child(3) p {
+//     animation: circle .7s ease;
+// }
 
-.stage__item--active:nth-child(5) p {
-    animation: circle 1.3s ease;
-}
+// .stage__item--active:nth-child(5) p {
+//     animation: circle 0.8s ease;
+// }
 
 .stage__item:first-child p {
     padding: 7px 26px;
