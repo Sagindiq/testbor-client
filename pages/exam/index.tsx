@@ -1,68 +1,18 @@
 import { Poppins } from "@next/font/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Back from "../../components/back.btn";
 import Header from "../../components/header";
 import FacultiesSelector from "../../components/science/faculties.selector";
 import ScienceProcess from "../../components/science/exam.process";
 import ScienceSelector from "../../components/science/science.selector";
-import { processInterface, sciencesInterface } from "../../interfaces/science.interface";
+import { facultyArr } from "../../interfaces/faculties.interface";
+import { processInterface, examInterface } from "../../interfaces/science.interface";
 import { facultyChange } from "../../interfaces/faculties.interface";
 import Router from "next/router";
 const poppins = Poppins({ weight: '500'})
 
 
-export default function Exam({ sciences }: sciencesInterface) {
-
-  const facultyArr = [
-    {
-      _id: 1,
-      faculty_name: 'Amaliy matematika1',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    },
-    {
-      _id: 2,
-      faculty_name: 'Amaliy matematika2',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    },
-    {
-      _id: 3,
-      faculty_name: 'Amaliy matematika3',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    },
-    {
-      _id: 4,
-      faculty_name: 'Amaliy matematika4',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    },
-    {
-      _id: 5,
-      faculty_name: 'Amaliy matematika5',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    },
-    {
-      _id: 6,
-      faculty_name: 'Amaliy matematika6',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    },
-    {
-      _id: 7,
-      faculty_name: 'Amaliy matematika7',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    },
-    {
-      _id: 8,
-      faculty_name: 'Amaliy matematika8',
-      hei_name: 'Milliy universitet',
-      hei_short_name: `O'zMu`
-    }
-  ]
+export default function Exam({ sciences }: examInterface) {
   
   let examProcess: processInterface = {
     actionId: 1,
@@ -91,27 +41,26 @@ export default function Exam({ sciences }: sciencesInterface) {
   }
   
   const [ useProcess, setProcess ] = useState(examProcess)
+
+  const [faculties, setFaculty] = useState<facultyArr[]>([])
   
-  const handleChange = (first_science: string, second_science: string) => {
+  const handleChange = async (first_science: string, second_science: string) => {
     
     examProcess.actionId = 2
     examProcess.faculties.requires = [first_science, second_science]
     examProcess.sciences.visible = false
     examProcess.faculties.visible = true
 
-    console.log(first_science, second_science)
-
     setProcess(examProcess)
     Router.push({pathname: '/exam'})
     return
-
   }
+  
 
-  // const [faculties, setFaculty] = useState<facultyArr[]>([])
 
   const facultyChange: facultyChange = (array) => {
     console.log(array)
-    if (array?.length == 5) {
+    if (array?.length > 0) {
       examProcess.actionId = 3
       examProcess.sciences.visible = false
       examProcess.faculties.visible = true
@@ -144,7 +93,7 @@ export default function Exam({ sciences }: sciencesInterface) {
             }
 
             {
-              useProcess.faculties.visible && useProcess.actionId > 1  &&  <FacultiesSelector facultiesArr={facultyArr} facultyChange={facultyChange} />
+              useProcess.faculties.visible && useProcess.actionId > 1  &&  <FacultiesSelector scienceCouple={useProcess.faculties.requires} facultyChange={facultyChange} />
             }
 
           </div>

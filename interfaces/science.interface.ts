@@ -1,6 +1,6 @@
 import { ReactEventHandler } from "react"
 
-export interface sciencesInterface {
+export interface examInterface {
     sciences: {
         _id: string,
         science_name: string

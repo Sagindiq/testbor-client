@@ -1,99 +1,3 @@
-// import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material"
-// import { useState } from "react"
-
-// export default function FacultiesSelector() {
-
-    // const faculties = [
-    //     {
-    //         _id: 1,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     },
-    //     {
-    //         _id: 2,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     },
-    //     {
-    //         _id: 3,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     },
-    //     {
-    //         _id: 4,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     },
-    //     {
-    //         _id: 5,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     },
-    //     {
-    //         _id: 6,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     },
-    //     {
-    //         _id: 7,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     },
-    //     {
-    //         _id: 8,
-    //         faculty_name: 'Amaliy matematika',
-    //         hei_name: 'Milliy universitet',
-    //         hei_short_name: `O'zMu`
-    //     }
-    // ]
-
-//     const selectedFaculties: string[] = []
-
-//     const [facultyies, setFaculty] = useState<string[]>(selectedFaculties)
-
-    
-//     const handleFaculty = (evt: SelectChangeEvent) => {
-//         selectedFaculties.push()
-
-//         setFaculty(selectedFaculties)
-
-//     }
-
-//     return (
-//         <>
-//             <div className="faculties">
-
-//                 <FormControl sx={{ marginBottom: '30px', width: '400px' }} fullWidth>
-//                     <InputLabel id="demo-simple-select-label">Birinchi fan</InputLabel>
-//                     <Select sx={{ borderRadius: '15px' }}
-//                         labelId="demo-simple-select-label"
-//                         id="demo-simple-select"
-//                         multiple
-//                         value={facultyies}
-//                         label="Birinchi fan"
-//                         onChange={handleFaculty}
-//                     >
-//                         <MenuItem key={'default'} defaultValue="" disabled selected><em>Birinchi fanni tanlang</em></MenuItem>
-//                         {
-//                             faculties.map((el, index) => {
-//                                 return <MenuItem key={index} value={el._id}>{el.faculty_name}</MenuItem>
-//                             })
-//                         }
-//                     </Select>
-//                 </FormControl>
-
-//             </div>
-//         </>
-//     )
-// }
-
 import * as React from 'react';
 import { Theme, useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -131,9 +35,24 @@ function getStyles(name: string, faculties: string[], theme: Theme) {
     };
 }
 
-export default function FacultiesSelector({ facultiesArr, facultyChange }: facultySelector) {
+export default function FacultiesSelector({ scienceCouple, facultyChange }: facultySelector) {
 
     const { setAlert, setMessage }: any = useAlert()
+    const [ AllFaculties, setAllFaculties ] = React.useState<facultyArr[] | any[]>([])
+
+    React.useEffect((): void => {
+
+        if(scienceCouple[0] && scienceCouple[1]) {
+            fetch('http://localhost:9000/faculties', {
+                headers: {
+                    first_science: scienceCouple[0],
+                    second_science: scienceCouple[1]
+                }
+            }).then(res => res.json()).then(data => setAllFaculties(data))
+        }
+        
+    }, [])
+    
 
     const theme = useTheme();
     const [faculties, setFaculty] = React.useState<string[]>([]);
@@ -147,10 +66,7 @@ export default function FacultiesSelector({ facultiesArr, facultyChange }: facul
         if (values.length < 6) {
             setFaculty(values);
 
-            const facultyArr: facultyArr[] | any[] = values.map(f => {
-                const faculty = +f
-                return facultiesArr.find(el => el._id == faculty)
-            })
+            const facultyArr: facultyArr[] | any[] = values.map(f => AllFaculties.find(el => el._id == f))
 
             setFaculties(facultyArr)
 
@@ -200,13 +116,13 @@ export default function FacultiesSelector({ facultiesArr, facultyChange }: facul
                         input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                     >
-                        {facultiesArr.map(el => (
+                        {AllFaculties.map(el => (
                             <MenuItem
                                 key={el._id}
                                 value={el._id}
                                 style={getStyles(el.faculty_name, faculties, theme)}
                             >
-                                {el.faculty_name} ({el.hei_short_name})
+                                {el.faculty_name} ({el.hei.short_name})
                             </MenuItem>
                         ))}
                     </Select>
@@ -221,7 +137,7 @@ export default function FacultiesSelector({ facultiesArr, facultyChange }: facul
                         facultiesData.map(el =>
 
                             <motion.li initial={{scale: 0, opacity: 0}} animate={{scale: 1, opacity: 0.5}} className="faculty__item" key={el._id}>
-                                <p className={poppins.className}>{el.faculty_name} ({el.hei_short_name})</p>
+                                <p className={poppins.className}>{el.faculty_name} ({el.hei.short_name})</p>
                                 <IconButton onClick={handleCancel} className='cancel' sx={{ color: '#181616' }} data-id={el._id} aria-label="add to shopping cart">
                                     <CloseIcon sx={{ pointerEvents: 'none' }} />
                                 </IconButton>
@@ -232,7 +148,7 @@ export default function FacultiesSelector({ facultiesArr, facultyChange }: facul
                 </motion.ol>
 
                     {
-                        facultiesData.length > 4 &&
+                        facultiesData.length > 0 &&
                         <motion.div initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}} className="faculty__info">
 
                             <h3>Namangan davlat tibbiyot universiteti</h3>
