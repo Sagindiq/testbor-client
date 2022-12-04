@@ -6,8 +6,6 @@ export default function Selector() {
 
     const [region, setRegion] = useState('');
 
-    console.log(region)
-
     const selectorChange = (event: SelectChangeEvent) => {
         setRegion(event.target.value as string);
     };

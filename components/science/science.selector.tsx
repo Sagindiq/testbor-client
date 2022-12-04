@@ -1,13 +1,13 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material"
 import React, { useState } from "react";
 import { useAlert } from "../../context/alert.context";
-import { sciencesInterface } from "../../interfaces/science.interface";
+import { examInterface } from "../../interfaces/science.interface";
 import { motion } from 'framer-motion'
 import { Poppins } from "@next/font/google";
 
 const poppins = Poppins({ weight: '500'})
 
-const ScienceSelector = ({ sciences, handleChange }: sciencesInterface) => {
+const ScienceSelector = ({ sciences, handleChange }: examInterface) => {
 
     const { setAlert, setMessage }: any = useAlert()
 

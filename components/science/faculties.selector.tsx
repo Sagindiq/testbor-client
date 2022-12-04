@@ -35,24 +35,9 @@ function getStyles(name: string, faculties: string[], theme: Theme) {
     };
 }
 
-export default function FacultiesSelector({ scienceCouple, facultyChange }: facultySelector) {
+export default function FacultiesSelector({ allFaculties, facultyChange }: facultySelector) {
 
-    const { setAlert, setMessage }: any = useAlert()
-    const [ AllFaculties, setAllFaculties ] = React.useState<facultyArr[] | any[]>([])
-
-    React.useEffect((): void => {
-
-        if(scienceCouple[0] && scienceCouple[1]) {
-            fetch('http://localhost:9000/faculties', {
-                headers: {
-                    first_science: scienceCouple[0],
-                    second_science: scienceCouple[1]
-                }
-            }).then(res => res.json()).then(data => setAllFaculties(data))
-        }
-        
-    }, [])
-    
+    const { setAlert, setMessage }: any = useAlert() 
 
     const theme = useTheme();
     const [faculties, setFaculty] = React.useState<string[]>([]);
@@ -66,7 +51,7 @@ export default function FacultiesSelector({ scienceCouple, facultyChange }: facu
         if (values.length < 6) {
             setFaculty(values);
 
-            const facultyArr: facultyArr[] | any[] = values.map(f => AllFaculties.find(el => el._id == f))
+            const facultyArr: facultyArr[] | any[] = values.map(f => allFaculties.find(el => el._id == f))
 
             setFaculties(facultyArr)
 
@@ -104,31 +89,33 @@ export default function FacultiesSelector({ scienceCouple, facultyChange }: facu
     return (
         <div className='faculties'>
 
-            <motion.div className='faculties-selector' initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                <FormControl sx={{ m: 1, width: '400px' }}>
-                    <InputLabel id="demo-multiple-name-label">Fakultetlar</InputLabel>
-                    <Select
-                        labelId="demo-multiple-name-label"
-                        id="demo-multiple-name"
-                        multiple
-                        value={faculties}
-                        onChange={handleChange}
-                        input={<OutlinedInput label="Name" />}
-                        MenuProps={MenuProps}
-                    >
-                        {AllFaculties.map(el => (
-                            <MenuItem
-                                key={el._id}
-                                value={el._id}
-                                style={getStyles(el.faculty_name, faculties, theme)}
-                            >
-                                {el.faculty_name} ({el.hei.short_name})
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+            {
+                allFaculties.length && <motion.div className='faculties-selector' initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+                    <FormControl sx={{ m: 1, width: '400px' }}>
+                        <InputLabel id="demo-multiple-name-label">Fakultetlar</InputLabel>
+                        <Select
+                            labelId="demo-multiple-name-label"
+                            id="demo-multiple-name"
+                            multiple
+                            value={faculties}
+                            onChange={handleChange}
+                            input={<OutlinedInput label="Name" />}
+                            MenuProps={MenuProps}
+                        >
+                            {allFaculties.map(el => (
+                                <MenuItem
+                                    key={el._id}
+                                    value={el._id}
+                                    style={getStyles(el.faculty_name, faculties, theme)}
+                                >
+                                    {el.faculty_name} ({el.hei.short_name})
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
 
-            </motion.div>
+                </motion.div>
+            }
             
             {faculties.length > 0 && 
             <div>
@@ -148,7 +135,7 @@ export default function FacultiesSelector({ scienceCouple, facultyChange }: facu
                 </motion.ol>
 
                     {
-                        facultiesData.length > 0 &&
+                        facultiesData.length > 0 ?
                         <motion.div initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}} className="faculty__info">
 
                             <h3>Namangan davlat tibbiyot universiteti</h3>
@@ -177,6 +164,7 @@ export default function FacultiesSelector({ scienceCouple, facultyChange }: facu
                             </table>
 
                         </motion.div>
+                        : null
                     }
                 
             </div>}

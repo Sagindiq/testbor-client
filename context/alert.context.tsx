@@ -21,8 +21,6 @@ const AlertProvider = ({ children }: PropsWithChildren) => {
         // const timeout = messageLength <= 6 ? 2200 : messageLength > 6 ? 3000 : messageLength > 10
         
         const timeout: number = messageLength / 2 * 1000
-
-        console.log(timeout)
         
         setTimeout(() => {
             alertRef.current?.classList.add('alert--disable')

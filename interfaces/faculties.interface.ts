@@ -1,6 +1,18 @@
 
 export interface facultySelector {
-    scienceCouple: string[],
+    allFaculties: {
+        _id: string,
+        faculty_name: string,
+        contract_score: number,
+        grant_score: number,
+        contract_limit: number,
+        grant_limit: number,
+        hei: {
+            _id: string,
+            hei_name: string,
+            short_name: string
+        }
+    }[],
     facultyChange: {
         (array: {
             _id: number,
