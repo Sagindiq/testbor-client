@@ -27,13 +27,17 @@ export interface facultySelector {
     }
 }
 
-// export interface facultyChange {
-//     (array: {
-//         _id: number,
-//         faculty_name: string,
-//         hei_short_name: string
-//     }[]): void
-// }
+export interface facultyChange {
+    (array: {
+        _id: number,
+        faculty_name: string,
+        hei: {
+            short_name: string,
+            hei_name: string,
+            hei_address: string
+        }
+    }[]): void
+}
 
 export interface facultyArr {
     _id: string,
