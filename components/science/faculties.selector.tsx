@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import {facultyArr, facultySelector } from '../../interfaces/faculties.interface';
+import {facultyArr, facultyObject, facultySelector } from '../../interfaces/faculties.interface';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Router from 'next/router';
@@ -42,6 +42,9 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
     const theme = useTheme();
     const [faculties, setFaculty] = React.useState<string[]>([]);
     const [facultiesData, setFaculties] = React.useState<facultyArr[] | any[]>([])
+    const [bestFaculty, setBestFaculty] = React.useState<facultyObject>()
+
+    const [ loading, setLoading ] = React.useState<boolean>(false)
 
     const handleChange = (event: SelectChangeEvent<typeof faculties>) => {
         event.preventDefault()
@@ -85,6 +88,19 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
         return
     }
 
+    React.useEffect(() => {
+
+        const contracts: number[] = facultiesData?.map(el => el.contract_score)
+        const findMin = Math.min(...contracts)
+        const foundFaculty = facultiesData.find(el => el.contract_score == findMin)
+        console.log(foundFaculty)
+        setBestFaculty(foundFaculty)
+        
+    }, [facultiesData])
+    
+    const handleSubmit = () => {
+        setLoading(true)
+    }
     
     return (
         <div className='faculties'>
@@ -119,7 +135,7 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
             
             {faculties.length > 0 && 
             <div>
-                <motion.ol initial={{x: 350, opacity: 0}} animate={{x: 0, opacity: 1}} className="faculty__list">
+                <motion.ol initial={{x: 500, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{duration: 0.2}} className="faculty__list">
                     {
                         facultiesData.map(el =>
 
@@ -136,10 +152,10 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
 
                     {
                         facultiesData.length > 0 ?
-                        <motion.div initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}} className="faculty__info">
+                        <motion.div initial={{x: 500, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{duration: 0.2}} className="faculty__info">
 
-                            <h3>Namangan davlat tibbiyot universiteti</h3>
-                            <p>Namangan viloyati</p>
+                            <h3>{bestFaculty?.hei?.hei_name}</h3>
+                            <p>{bestFaculty?.hei?.address}</p>
 
                             <table>
                                 {/* <thead>
@@ -152,18 +168,23 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
                                 <tbody>
                                     <tr>
                                         <td className='faculty__title'>Grant</td>
-                                        <td className='faculty__limit'>78</td>
-                                        <td className='faculty__score'>189.9</td>
+                                        <td className='faculty__limit'>{bestFaculty?.grant_limit}</td>
+                                        <td className='faculty__score'>{bestFaculty?.grant_score}</td>
                                     </tr>
                                     <tr>
                                         <td className='faculty__title'>Shartnoma</td>
-                                        <td className='faculty__limit'>84</td>
-                                        <td className='faculty__score'>173.6</td>
+                                        <td className='faculty__limit'>{bestFaculty?.contract_limit}</td>
+                                        <td className='faculty__score'>{bestFaculty?.contract_score}</td>
                                     </tr>
                                 </tbody>
                             </table>
 
+                            
+
                         </motion.div>
+
+
+
                         : null
                     }
                 
