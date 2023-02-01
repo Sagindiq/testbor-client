@@ -15,7 +15,6 @@ export interface processInterface {
     },
     faculties: {
         visible: boolean,
-        requires: string[]
     },
     tests: {
         visible: boolean,

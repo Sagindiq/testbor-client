@@ -4,7 +4,6 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  overflow: hidden;
     
 }
 
@@ -27,6 +26,12 @@ a {
     color: black;
     background: white;
   }
+}
+
+.container {
+  width: 1330px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 

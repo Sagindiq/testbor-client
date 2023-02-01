@@ -12,6 +12,7 @@ import Router from 'next/router';
 import { useAlert } from '../../context/alert.context';
 import { motion } from 'framer-motion'
 import { Poppins } from '@next/font/google';
+import Link from 'next/link';
 
 const poppins = Poppins({ weight: '500'})
 
@@ -43,8 +44,6 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
     const [faculties, setFaculty] = React.useState<string[]>([]);
     const [facultiesData, setFaculties] = React.useState<facultyArr[] | any[]>([])
     const [bestFaculty, setBestFaculty] = React.useState<facultyObject>()
-
-    const [ loading, setLoading ] = React.useState<boolean>(false)
 
     const handleChange = (event: SelectChangeEvent<typeof faculties>) => {
         event.preventDefault()
@@ -97,10 +96,6 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
         setBestFaculty(foundFaculty)
         
     }, [facultiesData])
-    
-    const handleSubmit = () => {
-        setLoading(true)
-    }
     
     return (
         <div className='faculties'>
@@ -157,33 +152,36 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
                             <h3>{bestFaculty?.hei?.hei_name}</h3>
                             <p>{bestFaculty?.hei?.address}</p>
 
-                            <table>
-                                {/* <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Limit</th>
-                                        <th>ball</th>
-                                    </tr>
-                                </thead> */}
-                                <tbody>
-                                    <tr>
-                                        <td className='faculty__title'>Grant</td>
-                                        <td className='faculty__limit'>{bestFaculty?.grant_limit}</td>
-                                        <td className='faculty__score'>{bestFaculty?.grant_score}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='faculty__title'>Shartnoma</td>
-                                        <td className='faculty__limit'>{bestFaculty?.contract_limit}</td>
-                                        <td className='faculty__score'>{bestFaculty?.contract_score}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div className='faculties__info'>
+                                <table>
+                                    {/* <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Limit</th>
+                                            <th>ball</th>
+                                        </tr>
+                                    </thead> */}
+                                    <tbody>
+                                        <tr>
+                                            <td className='faculty__title'>Grant</td>
+                                            <td className='faculty__limit'>{bestFaculty?.grant_limit}</td>
+                                            <td className='faculty__score'>{bestFaculty?.grant_score}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className='faculty__title'>Shartnoma</td>
+                                            <td className='faculty__limit'>{bestFaculty?.contract_limit}</td>
+                                            <td className='faculty__score'>{bestFaculty?.contract_score}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-                            
+                                <Link href={'/test'} className='start-test-btn'>Testni boshlash</Link>
+                            </div>
+
 
                         </motion.div>
 
-
+                                    
 
                         : null
                     }

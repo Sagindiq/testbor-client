@@ -1,4 +1,3 @@
-
 export interface facultySelector {
     allFaculties: {
         _id: string,
@@ -15,7 +14,7 @@ export interface facultySelector {
     }[],
     facultyChange: {
         (array: {
-            _id: number,
+            _id: string,
             faculty_name: string,
             hei: {
                 _id: string,
@@ -29,7 +28,7 @@ export interface facultySelector {
 
 export interface facultyChange {
     (array: {
-        _id: number,
+        _id: string,
         faculty_name: string,
         hei: {
             short_name: string,

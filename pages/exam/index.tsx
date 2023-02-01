@@ -23,7 +23,6 @@ export default function Exam({ sciences }: examInterface) {
     },
     faculties: {
       visible: false,
-      requires: []
     },
 
     tests: {
@@ -50,6 +49,9 @@ export default function Exam({ sciences }: examInterface) {
     
     if (first_science && second_science) {
 
+      localStorage.setItem('first_science', first_science)
+      localStorage.setItem('second_science', second_science)
+
       fetch('http://localhost:9000/faculties', {
         headers: {
           first_science,
@@ -59,7 +61,6 @@ export default function Exam({ sciences }: examInterface) {
         if (data.length > 0) {
 
           examProcess.actionId = 2
-          examProcess.faculties.requires = [first_science, second_science]
           examProcess.sciences.visible = false
           examProcess.faculties.visible = true
           setFaculties(data)
@@ -86,6 +87,11 @@ export default function Exam({ sciences }: examInterface) {
       examProcess.sciences.visible = false
       examProcess.faculties.visible = true
       setProcess(examProcess)
+      let faculties: string[] = []
+      array.map(el => {
+        faculties.push(el._id)
+      })
+      localStorage.setItem('faculties', JSON.stringify(faculties))
     } else {
       examProcess.actionId = 2
       examProcess.sciences.visible = false

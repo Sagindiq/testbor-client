@@ -89,6 +89,12 @@
     padding-left: 22px;
 }
 
+.faculties__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 table {
     padding-bottom: 15px;
 }
@@ -112,4 +118,14 @@ td {
 
 .faculty__title {
     width: 165px;
+}
+
+.start-test-btn {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #18A0FB;
+    border: none;
+    border-radius: 5px
+    
+    ;
 }
