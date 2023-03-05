@@ -1,21 +1,13 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material"
 import React, { useState } from "react";
-import { useAlert } from "../../context/alert.context";
 import { examInterface } from "../../interfaces/science.interface";
 import { motion } from 'framer-motion'
 import { Poppins } from "@next/font/google";
+import { toast } from "react-toastify";
 
 const poppins = Poppins({ weight: '500'})
 
 const ScienceSelector = ({ sciences, handleChange }: examInterface) => {
-
-    const { setAlert, setMessage }: any = useAlert()
-
-    // useEffect(() => {
-    //     setAlert('info')
-    //     setMessage('Iltimos imtihon fanlarini tanlashdan to imtihon javoblari natijasi chiqmaguncha sahifani umuman yangilamang')
-    // }, [])
-    
 
     const [firstScience, setFirstScience] = useState('');
     const [secondScience, setSecondScience] = useState('');
@@ -24,8 +16,7 @@ const ScienceSelector = ({ sciences, handleChange }: examInterface) => {
         event.preventDefault()
         
         if(event.target.value == secondScience) {
-            setAlert('error')
-            setMessage('Bitta fanni ikki marta tanlash mumkin emas');
+            toast.error('Bitta fanni ikki marta tanlash mumkin emas')
             return
         }
 
@@ -41,8 +32,7 @@ const ScienceSelector = ({ sciences, handleChange }: examInterface) => {
         event.preventDefault()
         
         if (firstScience == event.target.value) {
-            setAlert('error')
-            setMessage('Bitta fanni ikki marta tanlash mumkin emas')
+            toast.error('Bitta fanni ikki marta tanlash mumkin emas')
             return
         }
         

@@ -10,11 +10,10 @@ import { facultyChange } from "../../interfaces/faculties.interface";
 import Router from "next/router";
 const poppins = Poppins({ weight: '500'})
 import { facultyArr } from "../../interfaces/faculties.interface";
-import { useAlert } from "../../context/alert.context";
+import { toast } from "react-toastify";
+import config from "../../config/config";
 
 export default function Exam({ sciences }: examInterface) {
-
-  const { setAlert, setMessage }: any = useAlert()
   
   let examProcess: processInterface = {
     actionId: 1,
@@ -52,7 +51,7 @@ export default function Exam({ sciences }: examInterface) {
       localStorage.setItem('first_science', first_science)
       localStorage.setItem('second_science', second_science)
 
-      fetch('http://localhost:9000/faculties', {
+      fetch(config.server + '/faculties', {
         headers: {
           first_science,
           second_science
@@ -69,8 +68,7 @@ export default function Exam({ sciences }: examInterface) {
           return
 
         } else {
-          setAlert('warning')
-          setMessage(`bu fan bo'yicha fakultetlar mavjud emas`)
+          toast.warning(`bu fan bo'yicha fakultetlar mavjud emas`)
           return
         }
       })
@@ -134,7 +132,7 @@ export default function Exam({ sciences }: examInterface) {
 
 
 export async function getStaticProps() {
-  const data = await fetch(process.env.SERVER_URL + '/sciences').then(res => res.json())
+  const data = await fetch(config.server + '/sciences').then(res => res.json())
 
   return {
     props: {

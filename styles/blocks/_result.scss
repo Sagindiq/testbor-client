@@ -1,0 +1,188 @@
+.result__science-list {
+    width: 913px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    list-style: none;
+}
+
+.result__science-item {
+    margin-bottom: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.result__science-title {
+    width: 103px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+.result__science-progress {
+    width: 575px;
+    height: 0;
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #C4C4C4;
+    margin-left: 69px;
+    margin-right: 24px;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        left: -5px;
+        border-right: 8px solid #18A0FB;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+    }
+
+    &::after {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        right: -5px;
+        border-left: 8px solid #C4C4C4;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+    }
+}
+
+
+.result__science-progress--inner {
+    height: 0;
+    background-color: #18A0FB;
+    border: 1px solid #18A0FB;
+    animation: processWidth 1s linear;
+    position: relative;
+
+    .result__science-progress-precentage {
+        padding: 3px 10px;
+        background-color: #18A0FB;
+        color: #fff;
+        border-radius: 30px;
+        position: absolute;
+        top: -40px;
+        right: -26px;
+
+        &::after {
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            bottom: -7.5px;
+            left: 42%;
+            border-top: 7.8px solid #18A0FB;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+        }
+    }
+
+    .result__science-progress-precentage.second-precentage {
+        background-color: #3919FB;
+
+        &::after {
+            border-top-color: #3919FB;
+        }
+    }
+}
+
+.result__science-progress.second-progress::before {
+    border-right-color: #3919FB;
+}
+
+.result__science-progress--inner.second-inner {
+    background-color: #3919FB;
+    border-color: #3919FB;
+}
+
+.result__science-precentage {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 33px;
+    color: #000;
+    margin-right: 21px;
+}
+
+.result__science-score {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #000;
+}
+
+
+.result__details h3 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 30px;
+}
+
+.result__otm-list {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: -20px;
+}
+
+.result__otm-item {
+    width: 550px;
+    font-weight: bold;
+    font-style: oblique;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes processWidth {
+    from {
+        scale: 0;
+    }
+    to {
+        scale: 1;
+    }
+}

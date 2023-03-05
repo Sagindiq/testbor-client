@@ -9,10 +9,10 @@ import {facultyArr, facultyObject, facultySelector } from '../../interfaces/facu
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Router from 'next/router';
-import { useAlert } from '../../context/alert.context';
 import { motion } from 'framer-motion'
 import { Poppins } from '@next/font/google';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 const poppins = Poppins({ weight: '500'})
 
@@ -38,8 +38,6 @@ function getStyles(name: string, faculties: string[], theme: Theme) {
 
 export default function FacultiesSelector({ allFaculties, facultyChange }: facultySelector) {
 
-    const { setAlert, setMessage }: any = useAlert() 
-
     const theme = useTheme();
     const [faculties, setFaculty] = React.useState<string[]>([]);
     const [facultiesData, setFaculties] = React.useState<facultyArr[] | any[]>([])
@@ -59,8 +57,7 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
 
             facultyChange(facultyArr)
         } else {
-            setAlert('warning')
-            setMessage('5 ta dan ortiq fakultet tanlash mumkin emas!')
+            toast.warning('5 ta dan ortiq fakultet tanlash mumkin emas!')
         }
     };
 

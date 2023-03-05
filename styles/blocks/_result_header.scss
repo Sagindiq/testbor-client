@@ -1,0 +1,42 @@
+// .result__container {
+    
+// }
+
+.result-logo {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.logo__link {
+    width: 135px;
+    // margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .log__image {
+        width: 30px;
+        height: 22px;
+        // margin-right: 10px;
+    }
+}
+
+.logo__context {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    h3 {
+        font-size: 20px;
+        line-height: 10px;
+    }
+
+    p {
+        color: #18A0FB;
+    }
+}
+
+.result__title {
+    margin-top: 50px;
+}
