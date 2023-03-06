@@ -75,14 +75,12 @@ const Test = () => {
     };
 
     setSecondOptions(secondSelectedOptions);
-    console.log(secondSelectedOptions[index]);
   };
 
   const handleTest = (evt: MouseEvent): void => {
     evt.preventDefault();
     const firstOptioins: object[] = selectedOptions.filter((e) => e);
     const secondOptioins: object[] = secondSelectedOptions.filter((e) => e);
-    console.log(firstOptioins, secondOptioins);
 
     if (firstOptioins.length !== 30 || secondOptioins.length !== 30) {
       alert("Barcha savollarni to`ldiring");

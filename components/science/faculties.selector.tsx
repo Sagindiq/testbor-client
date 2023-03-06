@@ -89,7 +89,6 @@ export default function FacultiesSelector({ allFaculties, facultyChange }: facul
         const contracts: number[] = facultiesData?.map(el => el.contract_score)
         const findMin = Math.min(...contracts)
         const foundFaculty = facultiesData.find(el => el.contract_score == findMin)
-        console.log(foundFaculty)
         setBestFaculty(foundFaculty)
         
     }, [facultiesData])
