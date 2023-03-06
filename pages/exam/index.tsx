@@ -51,7 +51,7 @@ export default function Exam({ sciences }: examInterface) {
       localStorage.setItem('first_science', first_science)
       localStorage.setItem('second_science', second_science)
 
-      fetch('http://localhost:9000/faculties', {
+      fetch('http://3.35.216.183:9000/faculties', {
         headers: {
           first_science,
           second_science
