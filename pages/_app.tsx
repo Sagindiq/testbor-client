@@ -6,11 +6,8 @@ import AlertProvider from "../context/alert.context";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import dotenv from 'dotenv'
 
 export default function App({ Component, pageProps }: AppProps) {
-  
-    dotenv.config()
 
   const [cname, setCName] = useState("");
 
